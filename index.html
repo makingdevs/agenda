@@ -35,12 +35,12 @@
           </thead>
           <tbody>
           {{#each }}
-          <tr> 
+          <tr>
             <td>
               {{ id }}
             </td>
             <td>
-              {{ name }} 
+              {{ name }}
             </td>
             <td>0</td>
             <td>0</td>
@@ -60,14 +60,24 @@
       <hr>
       <div>
         <label>Person</label>
-        {{ input value=person }}
+        {{ view Ember.Select contentBinding="App.People"
+                             optionLabelPath="content.name"
+                             optionValuePath="content.id"
+                             prompt="Pick a person"
+                             selectionBinding="selectedPerson" }}
         <label>Hour</label>
-        {{ input value=hour }}
+        {{ view Ember.Select contentBinding="App.DaysOfWeeks"
+                             prompt="Pick a day"
+                             selectionBinding="dayOfWeekSelected" }}
         <label>Day</label>
-        {{ input value=day }}
+        {{ view Ember.Select contentBinding="App.HoursForDay"
+                             prompt="Pick a hour"
+                             selectionBinding="hourForDaySelected" }}
+        <button {{action "createAppointment"}}> Create appointment </button>
       </div>
 
       <hr>
+
       <table class="table table-condensed table-striped">
         <thead>
           <tr>

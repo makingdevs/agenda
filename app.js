@@ -5,7 +5,19 @@ App.Person = Ember.Object.extend({
   name : ""
 });
 
+App.Appointment = Ember.Object.extend({
+  id : "",
+  day : "",
+  hour: "",
+  person: ""
+});
+
 App.People = []
+App.Appointments = []
+
+App.DaysOfWeeks = ["Monday","Thursday","Wednesday","Tuesday","Friday","Saturday","Sunday"]
+
+App.HoursForDay = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
 
 App.Router.map( function() {
   this.route('people');
@@ -34,6 +46,31 @@ App.PeopleController = Ember.ArrayController.extend({
   }
 
 });
+
+App.CalendarController = Ember.ObjectController.extend({
+  selectedPerson : null,
+  dayOfWeekSelected : null,
+  hourForDaySelected : null,
+
+  actions : {
+    createAppointment : function() {
+
+      var appointment = App.Appointment.create({
+        id: App.Appointments.length + 1,
+        person: this.get('selectedPerson'),
+        day: this.get('dayOfWeekSelected'),
+        hour: this.get('hourForDaySelected')
+      });
+
+      App.Appointments.pushObject(appointment);
+      console.log();
+      var column = App.DaysOfWeeks.indexOf(appointment.day);
+      var cell = $("tr td:contains("+appointment.hour+":00)").parent().find("td")[column+1];
+      $(cell).text(appointment.person.name);
+    }
+  }
+});
+
 
 
 Ember.Handlebars.helper('iterateOverHour', function() {
