@@ -2,7 +2,13 @@ var App = Ember.Application.create();
 
 App.Person = Ember.Object.extend({
   id : "",
-  name : ""
+  name : "",
+  appointments : [],
+
+  totalHours : function() {
+    return this.get('appointments.length');
+  }.property('appointments.@each.id')
+
 });
 
 App.Appointment = Ember.Object.extend({
@@ -13,7 +19,6 @@ App.Appointment = Ember.Object.extend({
 });
 
 App.People = []
-App.Appointments = []
 
 App.DaysOfWeeks = ["Monday","Thursday","Wednesday","Tuesday","Friday","Saturday","Sunday"]
 
@@ -54,16 +59,15 @@ App.CalendarController = Ember.ObjectController.extend({
 
   actions : {
     createAppointment : function() {
-
+      var person = this.get('selectedPerson');
       var appointment = App.Appointment.create({
-        id: App.Appointments.length + 1,
-        person: this.get('selectedPerson'),
+        id: person.get('appointments').length + 1,
+        person: person,
         day: this.get('dayOfWeekSelected'),
         hour: this.get('hourForDaySelected')
       });
+      person.get('appointments').pushObject(appointment);
 
-      App.Appointments.pushObject(appointment);
-      console.log();
       var column = App.DaysOfWeeks.indexOf(appointment.day);
       var cell = $("tr td:contains("+appointment.hour+":00)").parent().find("td")[column+1];
       $(cell).text(appointment.person.name);
