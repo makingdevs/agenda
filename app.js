@@ -1,7 +1,11 @@
 var App = Ember.Application.create();
 
-App.Person = Em.Object.create({
+App.Person = Ember.Object.extend({
+  id : "",
+  name : ""
 });
+
+App.People = []
 
 App.Router.map( function() {
   this.route('people');
@@ -9,22 +13,22 @@ App.Router.map( function() {
 });
 
 App.PeopleRoute = Ember.Route.extend({
-
   model : function() {
-    []
+    return App.People;
   }
-
 });
 
 App.PeopleController = Ember.ArrayController.extend({
 
   actions : {
     addPerson : function() {
-      var model = this.get('model');
-      model.pushObject({
+      var person = App.Person.create({
+        id : App.People.length + 1,
         name : this.get('name')
       });
 
+      var model = this.get('model');
+      model.pushObject( person );
       this.set('name', '');
     }
   }
