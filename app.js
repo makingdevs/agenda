@@ -7,7 +7,7 @@ App.Person = Ember.Object.extend({
 
   totalHours : function() {
     return this.get('appointments.length');
-  }.property('appointments.@each.id')
+  }.property('appointments.@each')
 
 });
 
