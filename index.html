@@ -70,21 +70,27 @@
     <script type="text/x-handlebars" id="calendar">
       <hr>
       <div>
-        <label>Person</label>
-        {{ view Ember.Select contentBinding="App.People"
-                             optionLabelPath="content.name"
-                             optionValuePath="content.id"
-                             prompt="Pick a person"
-                             selectionBinding="selectedPerson" }}
-        <label>Hour</label>
-        {{ view Ember.Select contentBinding="App.DaysOfWeeks"
-                             prompt="Pick a day"
-                             selectionBinding="dayOfWeekSelected" }}
-        <label>Day</label>
-        {{ view Ember.Select contentBinding="App.HoursForDay"
-                             prompt="Pick a hour"
-                             selectionBinding="hourForDaySelected" }}
-        <button {{action "createAppointment"}}> Create appointment </button>
+        <p>
+          &nbsp;
+          <label>Person</label>
+          {{ view Ember.Select contentBinding="App.People"
+                               optionLabelPath="content.name"
+                               optionValuePath="content.id"
+                               prompt="Pick a person"
+                               selectionBinding="selectedPerson" }}
+          &nbsp;                 
+          <label>Day</label>
+          {{ view Ember.Select contentBinding="App.DaysOfWeeks"
+                               prompt="Pick a day"
+                               selectionBinding="dayOfWeekSelected" }}
+          &nbsp;                  
+          <label>Hour</label>
+          {{ view Ember.Select contentBinding="App.HoursForDay"
+                               prompt="Pick a hour"
+                               selectionBinding="hourForDaySelected" }}
+          &nbsp;                 
+          <button {{action "createAppointment"}}> Create appointment </button>
+        </p>  
       </div>
 
       <hr>
