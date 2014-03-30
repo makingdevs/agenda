@@ -18,18 +18,19 @@
         <pre><h1><span class="glyphicon glyphicon-calendar"></span> Agenda </h1></pre>
       </div>
       <p>
-        &nbsp;
-        {{#link-to 'people'}} <button class="btn btn-info" type="button"> Person </button> {{/link-to}}
-        {{outlet}}
+      &nbsp;
+      {{#link-to 'people'}} <button class="btn btn-info" type="button"> People </button> {{/link-to}}
+      {{#link-to 'calendar'}} <button class="btn btn-info" type="button"> Calendar </button>{{/link-to}}
+      {{outlet}}
       </p>
-    </script> 
+    </script>
     <script type="text/x-handlebars" id="people">
       <div>
         <p></p>
         <p>
-          &nbsp;
-          <label>Nombre</label>
-          {{ input name="name" value=name action="addPerson" }}
+        &nbsp;
+        <label>Nombre</label>
+        {{ input name="name" value=name action="addPerson" }}
         </p>
         <table class="table table-striped">
           <thead>
@@ -41,29 +42,29 @@
             </tr>
           </thead>
           <tbody>
-          {{#each }}
-          <tr>
-            <td>
-              <span class="badge badge-important">
-                {{ id }}
-              </span>
-            </td>
-            <td>
-              {{ name }}
-            </td>
-            <td>{{ totalHours }}</td>
-            <td>0</td>
-           </tr>
-          {{else}}
-          <tr><td colspan="4"> There's no people </td></tr>
-          {{/each}}
+            {{#each }}
+            <tr>
+              <td>
+                <span class="badge badge-important">
+                  {{ id }}
+                </span>
+              </td>
+              <td>
+                {{ name }}
+              </td>
+              <td>{{ totalHours }}</td>
+              <td>0</td>
+            </tr>
+            {{else}}
+            <tr><td colspan="4"> There's no people </td></tr>
+            {{/each}}
           </tbody>
         </table>
       </div>
       <p>
       &nbsp;
-       {{#link-to 'calendar'}} <button class="btn btn-info" type="button"> Calendar </button>{{/link-to}}
-       {{ outlet }}
+      {{#link-to 'calendar'}} <button class="btn btn-info" type="button"> Calendar </button>{{/link-to}}
+      {{ outlet }}
       </p>
     </script>
 
@@ -71,26 +72,26 @@
       <hr>
       <div>
         <p>
-          &nbsp;
-          <label>Person</label>
-          {{ view Ember.Select contentBinding="App.People"
-                               optionLabelPath="content.name"
-                               optionValuePath="content.id"
-                               prompt="Pick a person"
-                               selectionBinding="selectedPerson" }}
-          &nbsp;                 
-          <label>Day</label>
-          {{ view Ember.Select contentBinding="App.DaysOfWeeks"
-                               prompt="Pick a day"
-                               selectionBinding="dayOfWeekSelected" }}
-          &nbsp;                  
-          <label>Hour</label>
-          {{ view Ember.Select contentBinding="App.HoursForDay"
-                               prompt="Pick a hour"
-                               selectionBinding="hourForDaySelected" }}
-          &nbsp;                 
-          <button {{action "createAppointment"}}> Create appointment </button>
-        </p>  
+        &nbsp;
+        <label>Person</label>
+        {{ view Ember.Select contentBinding="App.People"
+            optionLabelPath="content.name"
+            optionValuePath="content.id"
+            prompt="Pick a person"
+            selectionBinding="selectedPerson" }}
+        &nbsp;
+        <label>Day</label>
+        {{ view Ember.Select contentBinding="App.DaysOfWeeks"
+            prompt="Pick a day"
+            selectionBinding="dayOfWeekSelected" }}
+        &nbsp;
+        <label>Hour</label>
+        {{ view Ember.Select contentBinding="App.HoursForDay"
+            prompt="Pick a hour"
+            selectionBinding="hourForDaySelected" }}
+        &nbsp;
+        <button {{action "createAppointment"}}> Create appointment </button>
+        </p>
       </div>
 
       <hr>
