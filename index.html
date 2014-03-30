@@ -14,9 +14,13 @@
 
   <body>
     <script type="text/x-handlebars">
-      <h1> Agenda </h1>
-      {{#link-to 'people'}} Person {{/link-to}}
-      {{outlet}}
+      <div class="span3 offset2">
+        <h1><span class="glyphicon glyphicon-calendar"></span> Agenda </h1>
+      </div>
+      <p></p>
+      <button class="btn btn-info" type="button">
+        {{#link-to 'people'}} Person {{/link-to}}</button>
+       {{outlet}}
     </script>
 
     <script type="text/x-handlebars" id="people">
