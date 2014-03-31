@@ -1,35 +1,34 @@
 <html>
 
   <head>
-    <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css"></link>
+    <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
     <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-
     <script type="text/javascript" src="bower_components/handlebars/handlebars.js"></script>
     <script type="text/javascript" src="bower_components/ember/ember.js"></script>
-
     <script type="text/javascript" src="app.js"></script>
   </head>
-
-
   <body>
+
     <script type="text/x-handlebars">
       <div class="span3 offset2">
         <pre><h1><span class="glyphicon glyphicon-calendar"></span> Agenda </h1></pre>
       </div>
       <p>
       &nbsp;
-      {{#link-to 'people'}} <button class="btn btn-info" type="button"> People </button> {{/link-to}}
-      {{#link-to 'calendar'}} <button class="btn btn-info" type="button"> Calendar </button>{{/link-to}}
+      {{#link-to 'people'}} <button class="btn btn-info" type="button"> <i class="glyphicon glyphicon-user"></i> People </button> {{/link-to}}
+      {{#link-to 'calendar'}} <button class="btn btn-info" type="button"> <i class="glyphicon glyphicon-list-alt"></i> Calendar </button>{{/link-to}}
       {{outlet}}
       </p>
     </script>
+
     <script type="text/x-handlebars" id="people">
+      <h2>People</h2>
       <div>
         <p></p>
         <p>
         &nbsp;
-        <label>Nombre</label>
+        <label>Name </label>
         {{ input name="name" value=name action="addPerson" }}
         </p>
         <table class="table table-striped">
@@ -45,9 +44,7 @@
             {{#each }}
             <tr>
               <td>
-                <span class="badge badge-important">
-                  {{ id }}
-                </span>
+                {{ id }}
               </td>
               <td>
                 {{ name }}
@@ -61,20 +58,16 @@
           </tbody>
         </table>
       </div>
-      <p>
-      &nbsp;
-      {{#link-to 'calendar'}} <button class="btn btn-info" type="button"> Calendar </button>{{/link-to}}
-      {{ outlet }}
-      </p>
     </script>
 
     <script type="text/x-handlebars" id="calendar">
       <hr>
-      <div>
+      <div class="form-inline" role="form">
         <p>
         &nbsp;
         <label>Person</label>
         {{ view Ember.Select contentBinding="App.People"
+            classNames="ember-view form-control"
             optionLabelPath="content.name"
             optionValuePath="content.id"
             prompt="Pick a person"
@@ -82,15 +75,17 @@
         &nbsp;
         <label>Day</label>
         {{ view Ember.Select contentBinding="App.DaysOfWeeks"
+            classNames="ember-view form-control"
             prompt="Pick a day"
             selectionBinding="dayOfWeekSelected" }}
         &nbsp;
         <label>Hour</label>
         {{ view Ember.Select contentBinding="App.HoursForDay"
+            classNames="ember-view form-control"
             prompt="Pick a hour"
             selectionBinding="hourForDaySelected" }}
         &nbsp;
-        <button {{action "createAppointment"}}> Create appointment </button>
+        <button {{action "createAppointment"}} class="btn btn-success"> <i class="glyphicon glyphicon-floppy-disk"></i> Create appointment </button>
         </p>
       </div>
 
@@ -110,10 +105,11 @@
           </tr>
         </thead>
         <tbody>
-          {{ iterateOverHour }}
+          {{ view App.HourPerWeekView }}
         </tbody>
       </table>
     </script>
+
   </body>
 
 </html>
