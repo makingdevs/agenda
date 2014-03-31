@@ -76,10 +76,19 @@ App.CalendarController = Ember.ObjectController.extend({
 });
 
 App.HourPerWeekView = Ember.CollectionView.extend({
+  tagName :'tr',
   content : [1,2,3,4,5,6,7,8],
   itemViewClass: Ember.View.extend({
-    template: Ember.Handlebars.compile("<td>{{view.content}}</td>")
+    template: Ember.Handlebars.compile("{{view.content}}")
   })
+});
+
+App.DaysAndHoursPerWeekView = Ember.ContainerView.create({
+  childViews : ['aView','bView','cView','dView'],
+  aView: App.HourPerWeekView.create(),
+  bView: App.HourPerWeekView.create(),
+  cView: App.HourPerWeekView.create(),
+  dView: App.HourPerWeekView.create()
 });
 
 Ember.Handlebars.helper('iterateOverHour', function() {
