@@ -14,12 +14,11 @@
       <div class="span3 offset2">
         <pre><h1><span class="glyphicon glyphicon-calendar"></span> Agenda </h1></pre>
       </div>
-      <p>
-      &nbsp;
-      {{#link-to 'people'}} <button class="btn btn-info" type="button"> <i class="glyphicon glyphicon-user"></i> People </button> {{/link-to}}
-      {{#link-to 'calendar'}} <button class="btn btn-info" type="button"> <i class="glyphicon glyphicon-list-alt"></i> Calendar </button>{{/link-to}}
-      {{outlet}}
-      </p>
+      <div>
+        {{#link-to 'people' class="btn btn-info" }} <i class="glyphicon glyphicon-user"></i> People {{/link-to}}
+        {{#link-to 'calendar' class="btn btn-info" }} <i class="glyphicon glyphicon-list-alt"></i> Calendar {{/link-to}}
+        {{outlet}}
+      </div>
     </script>
 
     <script type="text/x-handlebars" id="people">
@@ -105,7 +104,9 @@
           </tr>
         </thead>
         <tbody>
-          {{ view App.DaysAndHoursPerWeekView }}
+          {{#each App.HoursForDay}}
+            {{ view App.HourPerWeekView }}
+          {{/each}}
         </tbody>
       </table>
     </script>
