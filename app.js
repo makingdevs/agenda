@@ -75,12 +75,17 @@ App.CalendarController = Ember.ObjectController.extend({
   }
 });
 
+App.AppointmentView = Ember.View.extend({
+  template: Ember.Handlebars.compile("{{view.content}}"),
+  click : function(){
+    console.log(this.content);
+  }
+});
+
 App.HourPerWeekView = Ember.CollectionView.extend({
   tagName :'tr',
   content : [1,2,3,4,5,6,7,8],
-  itemViewClass: Ember.View.extend({
-    template: Ember.Handlebars.compile("{{view.content}}")
-  })
+  itemViewClass: App.AppointmentView.extend()
 });
 
 App.DaysAndHoursPerWeekView = Ember.ContainerView.create({
