@@ -14,17 +14,22 @@
 
   <body>
     <script type="text/x-handlebars">
-      <h1> Agenda </h1>
-      {{#link-to 'people'}} Person {{/link-to}}
-      {{outlet}}
-    </script>
-
+      <div class="span3 offset2">
+        <pre><h1><span class="glyphicon glyphicon-calendar"></span> Agenda </h1></pre>
+      </div>
+      <div>
+        {{#link-to 'people' class="btn btn-info" }} Person {{/link-to}}
+        {{outlet}}
+      </div>
+    </script> 
     <script type="text/x-handlebars" id="people">
       <div>
-        <label>Nombre</label>
-        {{ input name="name" value=name action="addPerson" }}
-
-        <table class="table">
+        <p></p>
+        <p>
+          <label>Nombre</label>
+          {{ input name="name" value=name action="addPerson" }}
+        </p>
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>#</th>
@@ -37,7 +42,9 @@
           {{#each }}
           <tr>
             <td>
-              {{ id }}
+              <span class="badge badge-important">
+                {{ id }}
+              </span>
             </td>
             <td>
               {{ name }}
@@ -51,29 +58,36 @@
           </tbody>
         </table>
       </div>
-
-      {{#link-to 'calendar'}} Calendar {{/link-to}}
-      {{ outlet }}
+      <p>
+       {{#link-to 'calendar' class="btn btn-info" }} Calendar {{/link-to}}
+       {{ outlet }}
+      </p>
     </script>
 
     <script type="text/x-handlebars" id="calendar">
       <hr>
       <div>
-        <label>Person</label>
-        {{ view Ember.Select contentBinding="App.People"
-                             optionLabelPath="content.name"
-                             optionValuePath="content.id"
-                             prompt="Pick a person"
-                             selectionBinding="selectedPerson" }}
-        <label>Hour</label>
-        {{ view Ember.Select contentBinding="App.DaysOfWeeks"
-                             prompt="Pick a day"
-                             selectionBinding="dayOfWeekSelected" }}
-        <label>Day</label>
-        {{ view Ember.Select contentBinding="App.HoursForDay"
-                             prompt="Pick a hour"
-                             selectionBinding="hourForDaySelected" }}
-        <button {{action "createAppointment"}}> Create appointment </button>
+        <p>
+          &nbsp;
+          <label>Person</label>
+          {{ view Ember.Select contentBinding="App.People"
+                               optionLabelPath="content.name"
+                               optionValuePath="content.id"
+                               prompt="Pick a person"
+                               selectionBinding="selectedPerson" }}
+          &nbsp;                 
+          <label>Day</label>
+          {{ view Ember.Select contentBinding="App.DaysOfWeeks"
+                               prompt="Pick a day"
+                               selectionBinding="dayOfWeekSelected" }}
+          &nbsp;                  
+          <label>Hour</label>
+          {{ view Ember.Select contentBinding="App.HoursForDay"
+                               prompt="Pick a hour"
+                               selectionBinding="hourForDaySelected" }}
+          &nbsp;                 
+          <button {{action "createAppointment"}}> Create appointment </button>
+        </p>  
       </div>
 
       <hr>
