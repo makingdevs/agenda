@@ -67,16 +67,18 @@ App.CalendarController = Ember.ObjectController.extend({
         hour: this.get('hourForDaySelected')
       });
       person.get('appointments').pushObject(appointment);
-
-      var column = App.DaysOfWeeks.indexOf(appointment.day);
-      var cell = $("tr td:contains("+appointment.hour+":00)").parent().find("td")[column+1];
-      $(cell).text(appointment.person.name);
     }
   }
 });
 
 App.AgendaView = Ember.View.extend({
-  templateName : 'agenda'
+  templateName : 'agenda',
+
+  didInsertElement : function() {
+    // var column = App.DaysOfWeeks.indexOf(appointment.day);
+    // var cell = $("tr td:contains("+appointment.hour+":00)").parent().find("td")[column+1];
+    // $(cell).text(appointment.person.name);
+  }
 });
 
 
