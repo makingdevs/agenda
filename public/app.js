@@ -1,9 +1,11 @@
 var App = Ember.Application.create();
 
+App.Appointments = [];
+
 App.Person = Ember.Object.extend({
   id : "",
   name : "",
-  appointments : [],
+  appointments : App.Appointments,
 
   totalHours : function() {
     return this.get('appointments.length');
@@ -32,6 +34,12 @@ App.Router.map( function() {
 App.PeopleRoute = Ember.Route.extend({
   model : function() {
     return App.People;
+  }
+});
+
+App.CalendarRoute = Ember.Route.extend({
+  model : function() {
+    return App.Appointments;
   }
 });
 
@@ -75,9 +83,11 @@ App.AgendaView = Ember.View.extend({
   templateName : 'agenda',
 
   didInsertElement : function() {
-    // var column = App.DaysOfWeeks.indexOf(appointment.day);
-    // var cell = $("tr td:contains("+appointment.hour+":00)").parent().find("td")[column+1];
-    // $(cell).text(appointment.person.name);
+    App.Appointments.forEach( function(item) {
+      var column = App.DaysOfWeeks.indexOf(item.get('day'));
+      var cell = $("tr td:contains("+item.get('hour')+":00)").parent().find("td")[column+1];
+      $(cell).text(item.get('person.name'));
+    });
   }
 });
 
