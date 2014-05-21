@@ -75,6 +75,10 @@ App.CalendarController = Ember.ObjectController.extend({
   }
 });
 
+App.AgendaView = Ember.View.extend({
+  templateName : 'agenda'
+});
+
 
 
 Ember.Handlebars.helper('iterateOverHour', function() {
